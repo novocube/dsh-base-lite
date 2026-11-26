@@ -1,0 +1,41 @@
+{
+  "name": "@novocube/dsh-base-lite",
+  "version": "0.1.0",
+  "description": "A low-context everyday agent preset for DeepSeek Harness with web, Goal, Todo, and Workflow.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novocube/dsh-base-lite.git"
+  },
+  "homepage": "https://github.com/novocube/dsh-base-lite#readme",
+  "bugs": {
+    "url": "https://github.com/novocube/dsh-base-lite/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "plugin",
+    "preset",
+    "low-context"
+  ],
+  "files": [
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "icon.svg",
+    "assets/base-lite-demo.png"
+  ],
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "pack:check": "npm pack --dry-run"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.5 <0.3.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
