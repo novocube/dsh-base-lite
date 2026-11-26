@@ -21,7 +21,12 @@ DeepSeek Harness 的低上下文日常模式插件。安装后新增独立的 **
 
 ### DeepSeek Harness Desktop
 
-打开 **插件 → 添加插件**，输入：
+Desktop profile 由桌面应用管理，请只从 **插件 → 添加插件** 安装；不要对
+`--profile desktop` 直接执行 `dsh plugin add/remove`，否则会触发整个 profile 的依赖重算，
+并可能把其他插件原有的版本冲突提前暴露出来。
+
+插件尚未发布到 registry 前，请在添加插件页填写 GitHub Release 的 `.tgz` 下载地址或本地
+`.tgz` 绝对路径。发布后才可直接输入：
 
 ```text
 @novocube/dsh-base-lite
@@ -39,6 +44,9 @@ npm pack
 ```
 
 然后在 **插件 → 添加插件** 中填写生成的 `.tgz` 绝对路径或 Release 下载地址。
+
+> `dsh <profile> --patch ./cordis.patch.yml --dump-config` 适合做只读组合验证；它不会安装
+> 插件，也不会重算 Desktop profile 的其他依赖。
 
 ## 从手工安装版迁移
 
@@ -76,3 +84,10 @@ npm run pack:check
 ## 安全边界
 
 本插件是纯配置 Bundle：没有安装脚本、Host JS、客户端注入或网络请求；不读取 API Key、凭据、会话日志或工作区文件。
+
+## 排障
+
+如果安装后 Desktop 报“server stopped unexpectedly”，先从错误详情确认失败的包名。只有错误
+明确指向 `@novocube/dsh-base-lite` 时才应归因于本插件；其他插件的 DSH 版本不兼容、重复
+Skill provider 或 CommonJS/ESM 加载冲突，需要由对应插件升级或由用户决定停用。本插件不会
+自动移除、禁用或放宽其他插件的版本安全检查。
